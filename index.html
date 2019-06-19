@@ -35,7 +35,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="card">
-                    <h3 class="card-header">Result</h3>
+                    <h3 class="card-header">Area <button id="atk" class="btn btn-primary atk"
+                            value="5"><span>Attack!</span></button>
+                    </h3>
                     <div class="card-body">
                         <h1 id="Player"></h1>
                         <h1 id="operator">VS</h1>
@@ -53,69 +55,96 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         //char select sheet
-        var fighter = { attack: "5", counterAttack: "10", hP: 200 };
-        var mage = { attack: "10", counterAttack: "10", hP: 100 };
-        var rogue = { attack: "5", counterAttack: "20", hP: 150 };
-        var monk = { attack: "2", counterAttack: "25", hP: 400 };
+        var fighter = { attack: 5, counterAttack: 0, hP: 200 };
+        var mage = { attack: 10, counterAttack: 10, hP: 100 };
+        var rogue = { attack: 5, counterAttack: 20, hP: 150 };
+        var monk = { attack: 2, counterAttack: 25, hP: 400 };
+
+        //variables for game
         var startGame = false;
+        var enemySelected = false;
         var playerChar = {};
         var computerChar = {};
+        var baseAttack = 0
         //~~~~~~~~~~~~~~~~~~
 
         $(".char").click(charactorSelect);
+        $(".atk").click(atkEnemy);
+
+
+        function atkEnemy() {
+            if (playerChar.hP > 0 && enemySelected === true) {
+                console.log(computerChar.hP);
+                console.log(playerChar.attack)
+                computerChar.hP = computerChar.hP - playerChar.attack;
+                playerChar.hP = playerChar.hP - computerChar.counterAttack;
+                console.log(playerChar.hP)
+                playerChar.attack = playerChar.attack + baseAttack;
+                if (playerChar.hP < 1) {
+                    $("#result").append("You LOSE");
+                }
+                else if (computerChar.hP < 1) {
+                    $("#result").append("You WIN");
+                    $("#Computer").empty();
+                    enemySelected = false;
+                }
+            };
+        }
 
 
 
 
 
 
-
-
-
-        function charactorSelect (){
+        function charactorSelect() {
             if (startGame === false) {
                 selecctedChar = $(this).text();
-                console.log(selecctedChar);
+                console.log(baseAttack);
                 $("#Player").append(selecctedChar);
                 startGame = true;
                 selAvatar();
                 console.log(playerChar)
+                $("button").remove(":contains('selecctedChar')")
+                console.log(selecctedChar)
             }
-            else{
+            else if (enemySelected === false) {
                 selecctedChar = $(this).text();
                 console.log(selecctedChar);
                 $("#Computer").append(selecctedChar);
                 selEnemy();
                 console.log(computerChar)
+                enemySelected = true;
+                $("#result").empty();
 
             }
+            baseAttack = playerChar.attack;
 
         };
-        function selAvatar(){
-            if(selecctedChar == "Fighter"){
+        function selAvatar() {
+            if (selecctedChar == "Fighter") {
                 playerChar = fighter;
             }
-            else if (selecctedChar == "Mage"){
+            else if (selecctedChar == "Mage") {
                 playerChar = mage;
             }
-            else if (selecctedChar == "Rogue"){
+            else if (selecctedChar == "Rogue") {
                 playerChar = rogue;
             }
-            else if (selecctedChar == "Monk"){
+            else if (selecctedChar == "Monk") {
                 playerChar = monk;
             }
         }
-        function selEnemy(){
-            if(selecctedChar == "Fighter"){
+        function selEnemy() {
+            if (selecctedChar == "Fighter") {
                 computerChar = fighter;
             }
-            else if (selecctedChar == "Mage"){
+            else if (selecctedChar == "Mage") {
                 computerChar = mage;
             }
-            else if (selecctedChar == "Rogue"){
+            else if (selecctedChar == "Rogue") {
                 computerChar = rogue;
             }
-            else if (selecctedChar == "Monk"){
+            else if (selecctedChar == "Monk") {
                 computerChar = monk;
             }
         }
