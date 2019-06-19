@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Added link to the jQuery Library -->
+
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Added a link to our external stylesheet-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <h3 class="card-header">Characters</h3>
+
+                    <div id="charSel" class="card-body">
+                        <button id="fighter1" class="btn btn-primary char" value="1"><span>Fighter</span></button>
+                        <button id="mage1" class="btn btn-primary char" value="2"><span>Mage</span></button>
+                        <button id="rogue1" class="btn btn-primary char" value="3"><span>Rogue</span></button>
+                        <button id="monk1" class="btn btn-primary char" value="4"><span>Monk</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <h3 class="card-header">Result</h3>
+                    <div class="card-body">
+                        <h1 id="Player"></h1>
+                        <h1 id="operator">VS</h1>
+                        <h1 id="Computer"></h1>
+                        <hr>
+                        <h1 id="result"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //char select sheet
+        var fighter = { attack: "5", counterAttack: "10", hP: 200 };
+        var mage = { attack: "10", counterAttack: "10", hP: 100 };
+        var rogue = { attack: "5", counterAttack: "20", hP: 150 };
+        var monk = { attack: "2", counterAttack: "25", hP: 400 };
+        var startGame = false;
+        var playerChar = {};
+        var computerChar = {};
+        //~~~~~~~~~~~~~~~~~~
+
+        $(".char").click(charactorSelect);
+
+
+
+
+
+
+
+
+
+        function charactorSelect (){
+            if (startGame === false) {
+                selecctedChar = $(this).text();
+                console.log(selecctedChar);
+                $("#Player").append(selecctedChar);
+                startGame = true;
+                selAvatar();
+                console.log(playerChar)
+            }
+            else{
+                selecctedChar = $(this).text();
+                console.log(selecctedChar);
+                $("#Computer").append(selecctedChar);
+                selEnemy();
+                console.log(computerChar)
+
+            }
+
+        };
+        function selAvatar(){
+            if(selecctedChar == "Fighter"){
+                playerChar = fighter;
+            }
+            else if (selecctedChar == "Mage"){
+                playerChar = mage;
+            }
+            else if (selecctedChar == "Rogue"){
+                playerChar = rogue;
+            }
+            else if (selecctedChar == "Monk"){
+                playerChar = monk;
+            }
+        }
+        function selEnemy(){
+            if(selecctedChar == "Fighter"){
+                computerChar = fighter;
+            }
+            else if (selecctedChar == "Mage"){
+                computerChar = mage;
+            }
+            else if (selecctedChar == "Rogue"){
+                computerChar = rogue;
+            }
+            else if (selecctedChar == "Monk"){
+                computerChar = monk;
+            }
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

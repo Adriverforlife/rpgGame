@@ -1,0 +1,30 @@
+a {
+    color: coral;
+}
+.bold {
+    font-weight: bold;
+    color: red;
+
+}
+.btn {
+    background-color: coral;
+}
+.bg-brown{
+    background-color: peru;
+}
+.card {
+    margin: 20px
+}
+body {
+    background-size: 100% ;
+    text-align: center;
+}
+li {
+    text-align: left;
+    
+}
+* {
+    
+    font-family: 'Roboto', sans-serif;
+
+}
