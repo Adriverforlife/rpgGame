@@ -35,13 +35,16 @@
             </div>
             <div class="col-lg-6">
                 <div class="card">
-                    <h3 class="card-header">Area <button id="atk" class="btn btn-primary atk"
+                    <h3 class="card-header">Arena <button id="atk" class="btn btn-primary atk"
                             value="5"><span>Attack!</span></button>
                     </h3>
                     <div class="card-body">
                         <h1 id="Player"></h1>
+                        <p id="playerhP"></p>
                         <h1 id="operator">VS</h1>
                         <h1 id="Computer"></h1>
+                        <p id="computerhP"></p>
+
                         <hr>
                         <h1 id="result"></h1>
                     </div>
@@ -78,6 +81,12 @@
                 console.log(playerChar.attack)
                 computerChar.hP = computerChar.hP - playerChar.attack;
                 playerChar.hP = playerChar.hP - computerChar.counterAttack;
+                $("#playerhP").empty();
+                $("#playerhP").append("HP: " + playerChar.hP);
+                $("#computerhP").empty();
+                $("#computerhP").append("HP: " + computerChar.hP);
+
+
                 console.log(playerChar.hP)
                 playerChar.attack = playerChar.attack + baseAttack;
                 if (playerChar.hP < 1) {
@@ -99,20 +108,16 @@
         function charactorSelect() {
             if (startGame === false) {
                 selecctedChar = $(this).text();
-                console.log(baseAttack);
                 $("#Player").append(selecctedChar);
                 startGame = true;
                 selAvatar();
-                console.log(playerChar)
                 $("button").remove(":contains('selecctedChar')")
-                console.log(selecctedChar)
+                
             }
             else if (enemySelected === false) {
                 selecctedChar = $(this).text();
-                console.log(selecctedChar);
                 $("#Computer").append(selecctedChar);
                 selEnemy();
-                console.log(computerChar)
                 enemySelected = true;
                 $("#result").empty();
 
@@ -133,6 +138,8 @@
             else if (selecctedChar == "Monk") {
                 playerChar = monk;
             }
+            $("#playerhP").append("HP: " + playerChar.hP);
+
         }
         function selEnemy() {
             if (selecctedChar == "Fighter") {
@@ -147,6 +154,8 @@
             else if (selecctedChar == "Monk") {
                 computerChar = monk;
             }
+            $("#computerhP").append("HP: " + computerChar.hP);
+
         }
 
     </script>
