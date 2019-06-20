@@ -22,33 +22,39 @@
         <div class="row">
 
             <div class="col-lg-4">
-                <div class="card">
+                <div id="charCard" class="card">
                     <h3 class="card-header">Characters</h3>
 
                     <div id="charSel" class="card-body">
-                        <button id="fighter1" class="btn btn-primary char" value="1"><span>Fighter</span></button>
-                        <button id="mage1" class="btn btn-primary char" value="2"><span>Mage</span></button>
-                        <button id="rogue1" class="btn btn-primary char" value="3"><span>Rogue</span></button>
-                        <button id="monk1" class="btn btn-primary char" value="4"><span>Monk</span></button>
+                        <button id="fighter1" class="btn btn-primary char"
+                            value="1"><span>Fighter</span></button><br><br>
+                        <button id="mage1" class="btn btn-primary char" value="2"><span>Mage</span></button><br><br>
+                        <button id="rogue1" class="btn btn-primary char" value="3"><span>Rogue</span></button><br><br>
+                        <button id="monk1" class="btn btn-primary char" value="4"><span>Monk</span></button><br><br>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card">
+                <div id="arena" class="card arenabkd">
                     <h3 class="card-header">Arena <button id="atk" class="btn btn-primary atk"
                             value="5"><span>Attack!</span></button>
                     </h3>
                     <div class="card-body">
-                        <h1 id="Player"></h1>
-                        <p id="playerhP"></p>
-                        <h1 id="operator">VS</h1>
-                        <h1 id="Computer"></h1>
-                        <p id="computerhP"></p>
+                        <h1 id="Player"> </h1>
+                        <p id="playerhP"> </p>
+                        <h1 id="operator"><img id="playerImg" src=""> VS <img id="computerImg" src=""></h1>
+                        <h1 id="Computer"> </h1>
 
-                        <hr>
-                        <h1 id="result"></h1>
+                        <p id="computerhP"> </p>
+
                     </div>
                 </div>
+                <div id="resultCard" class="card">
+                    <p id="damage"> </p>
+                    <h1 id="result"></h1>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -56,107 +62,13 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="game.js"></script>
+
     <script type="text/javascript">
-        //char select sheet
-        var fighter = { attack: 5, counterAttack: 0, hP: 200 };
-        var mage = { attack: 10, counterAttack: 10, hP: 100 };
-        var rogue = { attack: 5, counterAttack: 20, hP: 150 };
-        var monk = { attack: 2, counterAttack: 25, hP: 400 };
-
-        //variables for game
-        var startGame = false;
-        var enemySelected = false;
-        var playerChar = {};
-        var computerChar = {};
-        var baseAttack = 0
-        //~~~~~~~~~~~~~~~~~~
-
-        $(".char").click(charactorSelect);
-        $(".atk").click(atkEnemy);
-
-
-        function atkEnemy() {
-            if (playerChar.hP > 0 && enemySelected === true) {
-                console.log(computerChar.hP);
-                console.log(playerChar.attack)
-                computerChar.hP = computerChar.hP - playerChar.attack;
-                playerChar.hP = playerChar.hP - computerChar.counterAttack;
-                $("#playerhP").empty();
-                $("#playerhP").append("HP: " + playerChar.hP);
-                $("#computerhP").empty();
-                $("#computerhP").append("HP: " + computerChar.hP);
-
-
-                console.log(playerChar.hP)
-                playerChar.attack = playerChar.attack + baseAttack;
-                if (playerChar.hP < 1) {
-                    $("#result").append("You LOSE");
-                }
-                else if (computerChar.hP < 1) {
-                    $("#result").append("You WIN");
-                    $("#Computer").empty();
-                    enemySelected = false;
-                }
-            };
-        }
-
-
-
-
-
-
-        function charactorSelect() {
-            if (startGame === false) {
-                selecctedChar = $(this).text();
-                $("#Player").append(selecctedChar);
-                startGame = true;
-                selAvatar();
-                $("button").remove(":contains('selecctedChar')")
-                
-            }
-            else if (enemySelected === false) {
-                selecctedChar = $(this).text();
-                $("#Computer").append(selecctedChar);
-                selEnemy();
-                enemySelected = true;
-                $("#result").empty();
-
-            }
-            baseAttack = playerChar.attack;
-
-        };
-        function selAvatar() {
-            if (selecctedChar == "Fighter") {
-                playerChar = fighter;
-            }
-            else if (selecctedChar == "Mage") {
-                playerChar = mage;
-            }
-            else if (selecctedChar == "Rogue") {
-                playerChar = rogue;
-            }
-            else if (selecctedChar == "Monk") {
-                playerChar = monk;
-            }
-            $("#playerhP").append("HP: " + playerChar.hP);
-
-        }
-        function selEnemy() {
-            if (selecctedChar == "Fighter") {
-                computerChar = fighter;
-            }
-            else if (selecctedChar == "Mage") {
-                computerChar = mage;
-            }
-            else if (selecctedChar == "Rogue") {
-                computerChar = rogue;
-            }
-            else if (selecctedChar == "Monk") {
-                computerChar = monk;
-            }
-            $("#computerhP").append("HP: " + computerChar.hP);
-
-        }
+    $( document ).ready(function() {
+  // Handler for .ready() called.
+  rpgGame();
+});
 
     </script>
 

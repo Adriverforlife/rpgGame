@@ -1,13 +1,27 @@
 a {
     color: coral;
 }
+.arenabkd {
+    background-image: url("../images/back4.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 500px;
+    background-position: center;
+}
+#resultCard{
+    background-color: peru;
+}
+#charCard{
+    background-color: peru;
+
+}
 .bold {
     font-weight: bold;
     color: red;
 
 }
 .btn {
-    background-color: coral;
+    background-color: darkred;
+    border-color: blanchedalmond;
 }
 .bg-brown{
     background-color: peru;
@@ -16,6 +30,7 @@ a {
     margin: 20px
 }
 body {
+    background-color: black;
     background-size: 100% ;
     text-align: center;
 }
