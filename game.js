@@ -10,16 +10,26 @@ function rpgGame() {
     var enemySelected = false;
     var playerChar = {};
     var computerChar = {};
-    var baseAttack = 0
+    var baseAttack = 0;
+    var winCount = 0;
+    //SoundEffects
+    var deadSound =document.createElement("audio");
+    deadSound.setAttribute("src", "assets/sounds/dead.wav");
+    var atkSound = document.createElement("audio");
+    atkSound.setAttribute("src", "assets/sounds/attack.wav")
+
     //~~~~~~~~~~~~~~~~~~
 
     $(".char").click(charactorSelect);
     $(".atk").click(atkEnemy);
 
 
+   
+
     function atkEnemy() {
         if (playerChar.hP > 0 && enemySelected === true) {
             $("#damage").empty();
+            atkSound.play();
             console.log(computerChar.hP);
             console.log(playerChar.attack)
             computerChar.hP = computerChar.hP - playerChar.attack;
@@ -34,14 +44,19 @@ function rpgGame() {
             playerChar.attack = playerChar.attack + baseAttack;
             if (playerChar.hP < 1) {
                 $("#result").append("You LOSE");
+                deadSound.play();
+
             }
             else if (computerChar.hP < 1) {
                 $("#result").append("You WIN");
                 $("#Computer").empty();
                 $("#computerhP").empty();
                 $("#computerImg").attr("src", "");
-
+                deadSound.play();
                 enemySelected = false;
+                winCount++;
+                if(winCount = 3){
+                }
             }
         };
     }
